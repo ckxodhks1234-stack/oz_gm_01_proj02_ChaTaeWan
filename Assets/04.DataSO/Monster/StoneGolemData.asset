@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f91e2fe2627cf64fa31ae311970bc89, type: 3}
+  m_Name: StoneGolemData
+  m_EditorClassIdentifier: 
+  monsterName: StoneGolem
+  monsterMaxHp: 100
+  monsterMoveSpeed: 5
+  monsterPrefab: {fileID: 7287294381114834963, guid: 67faa4ba1db7ece40bbd763be1d067c3, type: 3}
+  gold: 5
