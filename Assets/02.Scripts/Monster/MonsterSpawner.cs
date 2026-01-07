@@ -6,6 +6,7 @@ public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] private WayPointPath wayPointPath;
     [SerializeField] private MonsterManager monsterManager;
+    [SerializeField] private PoolManager poolManager;
     [SerializeField] private List<WaveData> waveDataList;
 
     private WaveData currentWave;
@@ -17,12 +18,12 @@ public class MonsterSpawner : MonoBehaviour
 
         MonsterData data =currentWave.spawnMonsters[Random.Range(0, currentWave.spawnMonsters.Count)];
 
-        GameObject monsterObj = Instantiate(data.monsterPrefab, wayPointPath.points[0].position, Quaternion.identity);
+        GameObject monsterObj = poolManager.SpawnPool(data.monsterPrefab, wayPointPath.points[0].position, Quaternion.identity);
 
         MonsterBase monster = monsterObj.GetComponent<MonsterBase>();
-        monster.Initiallize(data, wayPointPath.GetPath(), monsterManager);
+        monster.Initiallize(data, wayPointPath.GetPath(), monsterManager, poolManager);
 
-        monsterManager.SpawnEnemy();
+        monsterManager.SpawnMonster();
     }
 
     public void SetWave(int waveIndex)
@@ -38,11 +39,7 @@ public class MonsterSpawner : MonoBehaviour
         //} 아래줄이 람다식으로 변경한 것
         currentWave = waveDataList.Find(w => w.waveIndex == waveIndex);
 
-        if (currentWave == null)
-        {
-            Debug.Log("웨이브 인덱스 없음");
-            return;
-        }
+        if (currentWave == null) return;
         Debug.Log($"현재 웨이브 : {currentWave.waveIndex}");
     }
 

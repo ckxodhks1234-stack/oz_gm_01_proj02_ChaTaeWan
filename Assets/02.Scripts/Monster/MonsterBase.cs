@@ -6,20 +6,27 @@ public class MonsterBase : MonoBehaviour
     private float moveSpeed;
 
     [Header("웨이 세팅")]
-    [SerializeField] private  Transform[] path;
-    [SerializeField] private int targetIndex;
+    private  Transform[] path;
+    private int targetIndex;
     [SerializeField] private float arriveRange = 0.1f;
-
     [SerializeField] private float rotateSpeed = 10f;
-    [SerializeField] private MonsterManager monsterManager;
 
-    public void Initiallize(MonsterData data, Transform[] pathPoints, MonsterManager manager)
+    private PoolManager poolManager;
+    private MonsterManager monsterManager;
+    private MonsterData monsterData;
+
+    //몬스터 정보들 초기화
+    public void Initiallize(MonsterData data, Transform[] pathPoints,
+        MonsterManager manager, PoolManager pool)
     {
+        monsterData = data;
+        monsterManager = manager;
+        poolManager = pool;
+
         currentHp = data.monsterMaxHp;
         moveSpeed = data.monsterMoveSpeed;
         path = pathPoints;
         targetIndex = 0;
-        monsterManager = manager;
     }
 
     void Update()
@@ -58,7 +65,7 @@ public class MonsterBase : MonoBehaviour
         }
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHp -= damage;
         if (currentHp <= 0)
@@ -69,7 +76,8 @@ public class MonsterBase : MonoBehaviour
 
     private void Die()
     {
-        gameObject.SetActive(false);
-        monsterManager.DieEnemy();
+        //죽으면 풀 반환
+        monsterManager.DieMonster();
+        poolManager.ReturnPool(monsterData.monsterPrefab, gameObject);
     }
 }

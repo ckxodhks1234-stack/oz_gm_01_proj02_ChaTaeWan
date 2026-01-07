@@ -175,6 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4894536906536182680}
+  - component: {fileID: 4232379240347439609}
   m_Layer: 0
   m_Name: DeviZone
   m_TagString: Untagged
@@ -199,3 +200,19 @@ Transform:
   - {fileID: 9063636465205023062}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4232379240347439609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5235210055129807138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac560c12500de040aca441d7ea7e5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path: []
+  targetIndex: 0
+  arriveRange: 0.1
+  rotateSpeed: 10

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e36811befaedcc46807e40f43838adc, type: 3}
+  m_Name: NarutoData
+  m_EditorClassIdentifier: 
+  unitName: Naruto
+  unitPrefab: {fileID: 5905287590733678916, guid: 74532c8b60b103d4c892d3f7664f5cc1, type: 3}
+  unitGrade: 0
+  attackDamage: 10
+  moveSpeed: 10
+  attackCoolTime: 2
+  attackRange: 5
+  unitChance: 0.03

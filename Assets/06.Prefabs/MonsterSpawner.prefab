@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b54e928c025be488215a891f530d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPointPath: {fileID: 0}
-  monsterManager: {fileID: 0}
+  wayPointPath: {fileID: 702748260296660030, guid: c5eb4e274c3c52b4fbc6d6f997372f4f, type: 3}
+  monsterManager: {fileID: 603492534246345760, guid: 11cb3379253effc42ae88714d8e74e06, type: 3}
   waveDataList:
   - {fileID: 11400000, guid: d6afce1e9046417469b6a4a048077f50, type: 2}
