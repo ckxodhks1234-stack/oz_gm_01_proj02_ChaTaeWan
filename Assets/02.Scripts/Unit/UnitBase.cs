@@ -1,47 +1,185 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
+
+public enum UnitState
+{
+    Move,
+    Attack,
+    AttackCoolTime
+}
 
 public class UnitBase : MonoBehaviour
 {
     [SerializeField] private UnitData unitData;
+    [SerializeField] private MonsterManager monsterManager;
     private PoolManager poolManager;
 
+    [SerializeField] private GameObject selectCircle;
+    private NavMeshAgent agent;
+    private Vector3 destination;
+    private bool isPlayerControlled;
+
     private float attackTimer;
+    private float attackBeforeTimer; //공격 선딜레이 타이머
+    [SerializeField] private float attackBeforeDelay = 0.2f;
+
     private MonsterBase target;
+    private UnitState currentState;
+    private Transform moveTarget;
 
     public UnitData UnitData { get; private set; }
+
     public void Init(UnitData data, PoolManager pool)
     {
         unitData = data;
         poolManager = pool;
 
-        attackTimer = 0f;
+        agent = GetComponent<NavMeshAgent>();
+        agent.enabled = true;
+        agent.isStopped = false;
+        agent.speed = unitData.moveSpeed;
+
+        isPlayerControlled = false;
         target = null;
+        Selected(false);
+        currentState = UnitState.Move;
+    }
+
+    public void MoveTo(Vector3 targetPos)
+    {
+        destination = targetPos;
+        isPlayerControlled = true;
+        currentState = UnitState.Move;
+
+        agent.isStopped = false;
+        agent.SetDestination(destination);
+    }
+
+    public void Selected(bool isSelected)
+    {
+        if(selectCircle != null)
+        {
+            selectCircle.SetActive(isSelected);
+        }
     }
 
     void Update()
     {
-        attackTimer -= Time.deltaTime;
-
-        //타겟이 없어지거나 범위 밖으로 나가면
-        if(target == null || !IsTargetRange(target))
+        Debug.Log($"{gameObject.name} 현재 상태: {currentState}");
+        if (attackTimer > 0)
         {
-            //가까운 몬스터 찾기
-            target = FindClosestMonster();
+            attackTimer -= Time.deltaTime;
+        }
+        if(attackBeforeTimer > 0)
+        {
+            attackBeforeTimer -= Time.deltaTime;
         }
 
-        if (target == null) return;
-
-        //공격 쿨타임이 0이면 공격
-        if (attackTimer <= 0f)
+        switch (currentState)
         {
-            Attack();
-            attackTimer = unitData.attackCoolTime;
+            case UnitState.Move:
+                UpdateMove();
+                break;
+            case UnitState.Attack:
+                UpdateAttack();
+                break;
+            case UnitState.AttackCoolTime:
+                UpdateAttackCoolTime();
+                break;
         }
     }
 
-    private void Attack()
+    private void UpdateMove()
     {
-        target.TakeDamage(unitData.attackDamage);
+        if (isPlayerControlled)
+        {
+            //목적지 거의 도착했으면 자동모드
+            if(!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                isPlayerControlled = false;
+            }
+            return; //수동으로 이동중에는 적 탐색 안함
+        }
+
+        //자동으로 가장 가까운 몬스터 찾기
+        target = FindClosestMonster();
+
+        //타겟이 있고, 공격 쿨타임 돌았으면 공격
+        if(target != null)
+        {
+            float distance = Vector3.Distance(transform.position, target.transform.position);
+
+            //사거리 안에 들어왔으면 공격 모드로 전환
+            if (distance <= unitData.attackRange && attackTimer <= 0)
+            {
+                agent.isStopped = true;
+                currentState = UnitState.Attack;
+
+                attackBeforeTimer = attackBeforeDelay;
+                Debug.Log("사거리 안에 들어옴, 공격 모드로 전환");
+            }
+            else
+            {
+                //사거리 밖이면 적 따라가기
+                agent.isStopped = false;
+                agent.SetDestination(target.transform.position);
+                Debug.Log("사거리 밖, 적 따라감");
+            }
+        }
+    }
+
+    private void UpdateAttack()
+    {
+        Debug.Log("공격중");
+        if (target == null || !target.gameObject.activeSelf)
+        {
+            currentState = UnitState.Move;
+            return;
+        }
+        transform.LookAt(target.transform);
+        if (attackBeforeTimer > 0)
+        {
+            return; //선딜레이 대기
+        }
+        Shoot(); //선딜레이 끝나면 공격 실행
+        attackTimer = unitData.attackCoolTime; //공격 쿨타임 설정
+        currentState = UnitState.AttackCoolTime;//공격 쿨타임 상태로 전환
+    }
+
+    private void Shoot()
+    {
+        if (target == null) return;
+
+        GameObject bulletObj = poolManager.SpawnPool(
+            unitData.bulletPrefab,
+            transform.position + Vector3.up * 0.5f,
+            Quaternion.identity
+        );
+
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        bullet.Init(unitData.bulletSpeed, unitData.attackDamage, target, poolManager, unitData.bulletPrefab);
+    }
+
+    private void UpdateAttackCoolTime()
+    {
+        if (target == null || !target.gameObject.activeSelf)
+        {
+            currentState = UnitState.Move;
+            return;
+        }
+        
+        //공격 쿨타임 중은 타겟 따라가기
+        agent.isStopped = false;
+        agent.SetDestination(target.transform.position);
+
+        //쿨타임 끝나고, 사정거리 안에 있으면 떄리기
+        if(attackTimer <= 0 && IsTargetRange(target))
+        {
+            agent.isStopped = true;
+            currentState = UnitState.Attack;
+            attackBeforeTimer = attackBeforeDelay; //공격 선딜레이
+        }
     }
 
     private bool IsTargetRange(MonsterBase monster)
@@ -55,17 +193,24 @@ public class UnitBase : MonoBehaviour
 
     private MonsterBase FindClosestMonster()
     {
-        MonsterBase[] monsters = FindObjectsOfType<MonsterBase>();
-
         MonsterBase closest = null;
-        float closestDistance = Mathf.Infinity;
+        float closestDistance = float.MaxValue;
 
-        //가장 가까운 몬스터 찾기
-        foreach (var monster in monsters)
+        if (monsterManager == null || monsterManager.Monsters == null)
         {
+            Debug.Log("몬스터 매니저를 못찾음");
+            return null;
+        }
+        Debug.Log($"유닛이 확인한 매니저의 몬스터 수: {monsterManager.Monsters.Count}");
+        //가장 가까운 몬스터 찾기
+        foreach (var monster in monsterManager.Monsters)
+        {
+            if(monster == null) continue;
+            if (!monster.gameObject.activeSelf) continue;
+
             float distance = Vector3.Distance(transform.position, monster.transform.position);
 
-            if (distance < closestDistance && distance <= unitData.attackRange)
+            if (distance < closestDistance)
             {
                 closestDistance = distance;
                 closest = monster;

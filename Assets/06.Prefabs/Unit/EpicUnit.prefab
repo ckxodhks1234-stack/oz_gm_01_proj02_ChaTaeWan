@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2390565272645336037}
-  - component: {fileID: 2272745078860216731}
   - component: {fileID: 6116823710787906667}
   - component: {fileID: 9203472146532844906}
   - component: {fileID: 8426795346088941369}
@@ -36,19 +35,6 @@ Transform:
   - {fileID: 8936462524144325623}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2272745078860216731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982862812439713311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c200bf7b825f3834e9bdaf425d9c14db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectCircle: {fileID: 7382582559837416204}
 --- !u!114 &6116823710787906667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: e3a1fb35b2283564eb85fa7ec0d0cc45, type: 2}
+  monsterManager: {fileID: 6815759124153151818, guid: e13191ff53f2bc947a86017d1106a729, type: 3}
+  selectCircle: {fileID: 7382582559837416204}
+  attackBeforeDelay: 0.2
 --- !u!195 &9203472146532844906
 NavMeshAgent:
   m_ObjectHideFlags: 0

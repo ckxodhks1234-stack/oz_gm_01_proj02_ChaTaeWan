@@ -16,7 +16,9 @@ MonoBehaviour:
   unitPrefab: {fileID: 5905287590733678916, guid: 74532c8b60b103d4c892d3f7664f5cc1, type: 3}
   unitGrade: 0
   attackDamage: 10
-  moveSpeed: 10
   attackCoolTime: 2
   attackRange: 5
+  moveSpeed: 10
   unitChance: 0.03
+  bulletPrefab: {fileID: 1875504158060303452, guid: 511c2463312c2fc44ba683103b6ce694, type: 3}
+  bulletSpeed: 10

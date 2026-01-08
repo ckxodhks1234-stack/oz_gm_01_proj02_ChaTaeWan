@@ -49,7 +49,7 @@ public class UnitGacha : MonoBehaviour
                 Vector3 spawnPos = GetUnitPosition();
 
                 GameObject unitObj = poolManager.SpawnPool(randomUnit.unitPrefab,
-                    spawnPos, Quaternion.identity);
+                    spawnPos, randomUnit.unitPrefab.transform.rotation);
 
                 UnitBase unitBase = unitObj.GetComponent<UnitBase>();
                 unitBase.Init(randomUnit, poolManager);

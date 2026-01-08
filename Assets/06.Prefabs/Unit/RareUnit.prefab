@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5870017908859119373}
   - component: {fileID: 8401634077338585914}
   - component: {fileID: 1905256845700598669}
-  - component: {fileID: 412142496943341180}
   m_Layer: 3
   m_Name: RareUnit
   m_TagString: Untagged
@@ -94,19 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: e39186aba78c1ee43b628f102abb592f, type: 2}
---- !u!114 &412142496943341180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880109831021814824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c200bf7b825f3834e9bdaf425d9c14db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  monsterManager: {fileID: 6815759124153151818, guid: e13191ff53f2bc947a86017d1106a729, type: 3}
   selectCircle: {fileID: 5445510186887783638}
+  attackBeforeDelay: 0.2
 --- !u!1 &5445510186887783638
 GameObject:
   m_ObjectHideFlags: 0

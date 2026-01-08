@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8988556019646338313}
   - component: {fileID: 4125238779289957753}
   - component: {fileID: 2824234781296028451}
-  - component: {fileID: 3629292270950213784}
   - component: {fileID: 6809857917857147826}
   m_Layer: 5
   m_Name: NormalUnit
@@ -71,19 +70,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: 4c3d5dcabdd439c42bb7dc561ac2ae96, type: 2}
---- !u!114 &3629292270950213784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3702831835322023339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c200bf7b825f3834e9bdaf425d9c14db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  monsterManager: {fileID: 6815759124153151818, guid: e13191ff53f2bc947a86017d1106a729, type: 3}
   selectCircle: {fileID: 7624041914086973002}
+  attackBeforeDelay: 0.2
 --- !u!136 &6809857917857147826
 CapsuleCollider:
   m_ObjectHideFlags: 0

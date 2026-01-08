@@ -523,7 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7152a6497742392468e2f08dc0c54ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSpawner: {fileID: 6966080578846643267, guid: cac85f121870fe54990a57f30f8c0c79, type: 3}
+  monsterSpawner: {fileID: 5152734104987117115, guid: 2eeccdc9e241b794ea5c28598a1c8505, type: 3}
   waveTime: 120
   restTime: 5
   waveTimerText: {fileID: 1511021729940875871}
@@ -544,9 +544,9 @@ MonoBehaviour:
   goldText: {fileID: 461900987378075925}
   unitText: {fileID: 2480552350628856316}
   enemyText: {fileID: 358778439111878006}
-  playerGold: {fileID: 4612959265991386172, guid: d9ec80c55c6abd644be3d164777c1d99, type: 3}
-  unitManager: {fileID: 5606060298222630964, guid: 98be44c19bd580a47b2366f4eee27999, type: 3}
-  monsterManager: {fileID: 603492534246345760, guid: 11cb3379253effc42ae88714d8e74e06, type: 3}
+  playerGold: {fileID: 794862785048632996, guid: 93ce170895e9e834f99eaade773441bf, type: 3}
+  unitManager: {fileID: 880979347039648730, guid: 585ce17d0786e7740ac97e40a967460c, type: 3}
+  monsterManager: {fileID: 6815759124153151818, guid: e13191ff53f2bc947a86017d1106a729, type: 3}
 --- !u!1 &5725689183014700452
 GameObject:
   m_ObjectHideFlags: 0

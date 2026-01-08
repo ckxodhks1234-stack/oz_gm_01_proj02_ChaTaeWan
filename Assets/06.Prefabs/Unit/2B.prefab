@@ -317,9 +317,6 @@ PrefabInstance:
       addedObject: {fileID: 2821720775650985929}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f68c5f4d2e53aca42970dab66ed32ec4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5672932526347949376}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f68c5f4d2e53aca42970dab66ed32ec4, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7121186256408780983}
   m_SourcePrefab: {fileID: 100100000, guid: f68c5f4d2e53aca42970dab66ed32ec4, type: 3}
 --- !u!1 &3976035312363689707 stripped
@@ -340,6 +337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: 3de60f2151d4e344b98e85dd8a90a8d2, type: 2}
+  monsterManager: {fileID: 6815759124153151818, guid: e13191ff53f2bc947a86017d1106a729, type: 3}
+  selectCircle: {fileID: 1568659799767977953}
+  attackBeforeDelay: 0.2
 --- !u!136 &2821720775650985929
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -363,19 +363,6 @@ CapsuleCollider:
   m_Height: 0.02
   m_Direction: 1
   m_Center: {x: 0, y: 0.02, z: 0}
---- !u!114 &5672932526347949376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3976035312363689707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c200bf7b825f3834e9bdaf425d9c14db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectCircle: {fileID: 1568659799767977953}
 --- !u!195 &7121186256408780983
 NavMeshAgent:
   m_ObjectHideFlags: 0

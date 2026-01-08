@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
-    public List<UnitMove> selectedUnits = new List<UnitMove>();
+    public List<UnitBase> selectedUnits = new List<UnitBase>();
     private Vector3 startMousePos;
     public LayerMask unitLayer;
     public LayerMask groundLayer;
@@ -13,6 +13,9 @@ public class UnitController : MonoBehaviour
 
     //드래그 사각형을 그릴 때 사용할 Texture
     private static Texture2D whiteTex;
+
+    private float searchTimer;
+    private float searchDelay = 0.2f;
 
     private void Awake()
     {
@@ -56,7 +59,7 @@ public class UnitController : MonoBehaviour
         selectedUnits.Clear();
 
         //유닛 선택
-        UnitMove[] allUnits = FindObjectsOfType<UnitMove>();
+        UnitBase[] allUnits = FindObjectsOfType<UnitBase>();
         foreach (var unit in allUnits)
         {
             Vector3 unitScreenPos = Camera.main.WorldToScreenPoint(unit.transform.position);
@@ -79,9 +82,14 @@ public class UnitController : MonoBehaviour
         {
             //유닛 이동
             Vector3 targetPos = hitInfo.point;
-            foreach (var unit in selectedUnits)
+
+            for(int i = 0; i < selectedUnits.Count; i++)
             {
-                unit.MoveTo(targetPos);
+                //유닛 많으면 주변으로 이동하게 함
+                Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * (selectedUnits.Count * 0.2f);
+                Vector3 destination = targetPos + new Vector3(randomOffset.x, 0, randomOffset.y);
+
+                selectedUnits[i].MoveTo(destination);
             }
         }
     }
@@ -93,6 +101,12 @@ public class UnitController : MonoBehaviour
         screenPos1.y = Screen.height - screenPos1.y;
         screenPos2.y = Screen.height - screenPos2.y;
 
+        //드래그 매우 작을 때(클릭만 했을 때)
+        if(Vector3.Distance(screenPos1, screenPos2) < 0.1f)
+        {
+            float clickSize = 2f;
+            return new Rect(screenPos1.x - clickSize, screenPos1.y - clickSize, clickSize * 2, clickSize * 2);
+        }
         //좌표 정리
         float xMin = Mathf.Min(screenPos1.x, screenPos2.x);
         float yMin = Mathf.Min(screenPos1.y, screenPos2.y);

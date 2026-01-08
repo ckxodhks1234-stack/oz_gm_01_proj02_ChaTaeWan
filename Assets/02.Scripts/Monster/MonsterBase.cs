@@ -27,6 +27,12 @@ public class MonsterBase : MonoBehaviour
         moveSpeed = data.monsterMoveSpeed;
         path = pathPoints;
         targetIndex = 0;
+
+        monsterManager.Monsters.Add(this);
+        if(monsterManager.Monsters.Count > 0)
+        {
+            Debug.Log($"현재 몬스터 수 : {monsterManager.Monsters.Count}");
+        }
     }
 
     void Update()
@@ -77,7 +83,8 @@ public class MonsterBase : MonoBehaviour
     private void Die()
     {
         //죽으면 풀 반환
-        monsterManager.DieMonster();
+        monsterManager.DieMonster(this);
         poolManager.ReturnPool(monsterData.monsterPrefab, gameObject);
+        monsterManager.Monsters.Remove(this);
     }
 }

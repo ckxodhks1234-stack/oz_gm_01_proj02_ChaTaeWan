@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2269638170861570899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3251202428645135555}
+  - component: {fileID: 9182884932497808482}
+  m_Layer: 0
+  m_Name: UnitGacha
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3251202428645135555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269638170861570899}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9182884932497808482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269638170861570899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ede5d7984f28584a8ad5955129605fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitDataList:
+  - {fileID: 11400000, guid: 4c3d5dcabdd439c42bb7dc561ac2ae96, type: 2}
+  - {fileID: 11400000, guid: e39186aba78c1ee43b628f102abb592f, type: 2}
+  - {fileID: 11400000, guid: e3a1fb35b2283564eb85fa7ec0d0cc45, type: 2}
+  - {fileID: 11400000, guid: 74266771a562f5240b43a56c4f9a54f1, type: 2}
+  - {fileID: 11400000, guid: 49b002b558e36a949a21be0fd110efe6, type: 2}
+  - {fileID: 11400000, guid: 3de60f2151d4e344b98e85dd8a90a8d2, type: 2}
+  - {fileID: 11400000, guid: 4819d8cf081c1804fbd48d30395fbc6e, type: 2}
+  playerGold: {fileID: 794862785048632996, guid: 93ce170895e9e834f99eaade773441bf, type: 3}
+  poolManager: {fileID: 7227384125042838280, guid: ed383a3a1e7f0dd42a1042c12ff3e399, type: 3}
+  unitManager: {fileID: 880979347039648730, guid: 585ce17d0786e7740ac97e40a967460c, type: 3}
+  gachaCost: 0
+  spawnPoint: {fileID: 3251202428645135555}
+  gachaKey: 103
+  gachaCoolTime: 0.1
+  spawnRadius: 2
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 8

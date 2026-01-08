@@ -22,7 +22,12 @@ public class UnitData : ScriptableObject
     public int attackDamage;
     public float attackCoolTime;
     public float attackRange;
+    public float moveSpeed;
 
     [Header("È®·ü")]
     public float unitChance;
+
+    [Header("ÃÑ¾Ë")]
+    public GameObject bulletPrefab;
+    public float bulletSpeed;
 }

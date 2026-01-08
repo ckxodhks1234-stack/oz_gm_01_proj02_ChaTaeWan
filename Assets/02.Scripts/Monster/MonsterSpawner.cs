@@ -23,7 +23,7 @@ public class MonsterSpawner : MonoBehaviour
         MonsterBase monster = monsterObj.GetComponent<MonsterBase>();
         monster.Initiallize(data, wayPointPath.GetPath(), monsterManager, poolManager);
 
-        monsterManager.SpawnMonster();
+        monsterManager.SpawnMonster(monster);
     }
 
     public void SetWave(int waveIndex)

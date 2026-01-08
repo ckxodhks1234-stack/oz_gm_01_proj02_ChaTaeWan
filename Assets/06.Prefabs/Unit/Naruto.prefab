@@ -200,7 +200,6 @@ GameObject:
   - component: {fileID: 6537005001955628030}
   - component: {fileID: 2133637600994074063}
   - component: {fileID: 7020350715693698560}
-  - component: {fileID: 3735075535877738937}
   - component: {fileID: 1623216347343498100}
   m_Layer: 3
   m_Name: Naruto
@@ -239,6 +238,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: 49b002b558e36a949a21be0fd110efe6, type: 2}
+  monsterManager: {fileID: 6815759124153151818, guid: e13191ff53f2bc947a86017d1106a729, type: 3}
+  selectCircle: {fileID: 3314152439208040379}
+  attackBeforeDelay: 0.2
 --- !u!136 &7020350715693698560
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -262,19 +264,6 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &3735075535877738937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5905287590733678916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c200bf7b825f3834e9bdaf425d9c14db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectCircle: {fileID: 3314152439208040379}
 --- !u!195 &1623216347343498100
 NavMeshAgent:
   m_ObjectHideFlags: 0
