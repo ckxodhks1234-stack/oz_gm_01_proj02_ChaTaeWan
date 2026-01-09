@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e36811befaedcc46807e40f43838adc, type: 3}
-  m_Name: 2BData
+  m_Name: RareUnitData
   m_EditorClassIdentifier: 
-  unitName: 2B
-  unitPrefab: {fileID: 3976035312363689707, guid: ae640db7b08573d4cb6600b1fe9babb5, type: 3}
-  unitGrade: 5
-  attackDamage: 10
+  unitName: RareUnit
+  unitPrefab: {fileID: 1880109831021814824, guid: 8e815cd1981159d47ab6912ac5358694, type: 3}
+  unitGrade: 0
+  attackDamage: 20
   attackCoolTime: 2
-  attackRange: 5
+  attackRange: 12
   moveSpeed: 10
-  unitChance: 0.015
-  bulletPrefab: {fileID: 3867528130831299708, guid: 68e03294e4c54ac4d9ea0b38016631d0, type: 3}
+  unitChance: 25
+  bulletPrefab: {fileID: 8214234702709673263, guid: 6ee2bb77532601448a689d090055021b, type: 3}
   bulletSpeed: 10

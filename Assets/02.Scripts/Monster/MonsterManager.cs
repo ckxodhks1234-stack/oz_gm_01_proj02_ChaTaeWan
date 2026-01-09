@@ -14,7 +14,7 @@ public class MonsterManager : MonoBehaviour
         if (!Monsters.Contains(monster))
         {
             Monsters.Add(monster);
-            currentMonsterCount++;
+            //currentMonsterCount++;
             CheckGameOver();
         }
     }
@@ -25,7 +25,7 @@ public class MonsterManager : MonoBehaviour
         if (Monsters.Contains(monster))
         {
             Monsters.Remove(monster);
-            currentMonsterCount--;
+            //currentMonsterCount--;
         }
     }
 

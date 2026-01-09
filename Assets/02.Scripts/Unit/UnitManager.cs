@@ -8,6 +8,7 @@ public class UnitManager : MonoBehaviour
 
     [SerializeField] private List<UnitData> unitDataList;
     [SerializeField] private PoolManager poolManager;
+    [SerializeField] private MonsterManager monsterManager;
 
     private List<UnitBase> units = new List<UnitBase>();
 
@@ -91,7 +92,7 @@ public class UnitManager : MonoBehaviour
     {
         GameObject unitObj = poolManager.SpawnPool(unitData.unitPrefab, pos, Quaternion.identity);
         UnitBase unitBase = unitObj.GetComponent<UnitBase>();
-        unitBase.Init(unitData, poolManager);
+        unitBase.Init(unitData, poolManager, monsterManager);
         AddUnit(unitBase);
     }
 

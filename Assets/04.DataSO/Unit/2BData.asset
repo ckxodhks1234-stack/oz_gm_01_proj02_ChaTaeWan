@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e36811befaedcc46807e40f43838adc, type: 3}
-  m_Name: RemData
+  m_Name: 2BData
   m_EditorClassIdentifier: 
-  unitName: Rem
-  unitPrefab: {fileID: 3167198120740137105, guid: bd6f14180517f5a4e9d87664bd15197e, type: 3}
-  unitGrade: 0
-  attackDamage: 10
-  attackCoolTime: 2
-  attackRange: 5
+  unitName: 2B
+  unitPrefab: {fileID: 3976035312363689707, guid: ae640db7b08573d4cb6600b1fe9babb5, type: 3}
+  unitGrade: 5
+  attackDamage: 80
+  attackCoolTime: 0.5
+  attackRange: 10
   moveSpeed: 10
-  unitChance: 0.05
-  bulletPrefab: {fileID: 5490131268878727932, guid: dd8b724579120454881ed3d56c3774c5, type: 3}
+  unitChance: 1.5
+  bulletPrefab: {fileID: 3867528130831299708, guid: 68e03294e4c54ac4d9ea0b38016631d0, type: 3}
   bulletSpeed: 10

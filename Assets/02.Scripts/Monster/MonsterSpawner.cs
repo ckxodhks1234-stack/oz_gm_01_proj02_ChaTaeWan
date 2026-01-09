@@ -65,7 +65,7 @@ public class MonsterSpawner : MonoBehaviour
         while (true)
         {
             //맥스카운트가 될 때까지 계속 스폰
-            if (monsterManager.currentMonsterCount < monsterManager.maxMonsterCount)
+            if (monsterManager.Monsters.Count < monsterManager.maxMonsterCount)
             {
                 Spawn();
             }

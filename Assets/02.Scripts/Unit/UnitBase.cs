@@ -12,7 +12,7 @@ public enum UnitState
 public class UnitBase : MonoBehaviour
 {
     [SerializeField] private UnitData unitData;
-    [SerializeField] private MonsterManager monsterManager;
+    private MonsterManager monsterManager;
     private PoolManager poolManager;
 
     [SerializeField] private GameObject selectCircle;
@@ -30,10 +30,11 @@ public class UnitBase : MonoBehaviour
 
     public UnitData UnitData { get; private set; }
 
-    public void Init(UnitData data, PoolManager pool)
+    public void Init(UnitData data, PoolManager pool, MonsterManager manager)
     {
         unitData = data;
         poolManager = pool;
+        monsterManager = manager;
 
         agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
@@ -98,10 +99,12 @@ public class UnitBase : MonoBehaviour
             if(!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 isPlayerControlled = false;
+                agent.isStopped = true;
             }
             return; //수동으로 이동중에는 적 탐색 안함
         }
 
+        agent.isStopped = true;
         //자동으로 가장 가까운 몬스터 찾기
         target = FindClosestMonster();
 
@@ -113,18 +116,9 @@ public class UnitBase : MonoBehaviour
             //사거리 안에 들어왔으면 공격 모드로 전환
             if (distance <= unitData.attackRange && attackTimer <= 0)
             {
-                agent.isStopped = true;
                 currentState = UnitState.Attack;
-
                 attackBeforeTimer = attackBeforeDelay;
                 Debug.Log("사거리 안에 들어옴, 공격 모드로 전환");
-            }
-            else
-            {
-                //사거리 밖이면 적 따라가기
-                agent.isStopped = false;
-                agent.SetDestination(target.transform.position);
-                Debug.Log("사거리 밖, 적 따라감");
             }
         }
     }
@@ -170,13 +164,18 @@ public class UnitBase : MonoBehaviour
         }
         
         //공격 쿨타임 중은 타겟 따라가기
-        agent.isStopped = false;
-        agent.SetDestination(target.transform.position);
+        agent.isStopped = true;
+
+        //타겟 밖에 있으면 다시 탐색하기
+        if (!IsTargetRange(target))
+        {
+            currentState = UnitState.Move;
+            return;
+        }
 
         //쿨타임 끝나고, 사정거리 안에 있으면 떄리기
-        if(attackTimer <= 0 && IsTargetRange(target))
+        if (attackTimer <= 0 && IsTargetRange(target))
         {
-            agent.isStopped = true;
             currentState = UnitState.Attack;
             attackBeforeTimer = attackBeforeDelay; //공격 선딜레이
         }
@@ -196,12 +195,6 @@ public class UnitBase : MonoBehaviour
         MonsterBase closest = null;
         float closestDistance = float.MaxValue;
 
-        if (monsterManager == null || monsterManager.Monsters == null)
-        {
-            Debug.Log("몬스터 매니저를 못찾음");
-            return null;
-        }
-        Debug.Log($"유닛이 확인한 매니저의 몬스터 수: {monsterManager.Monsters.Count}");
         //가장 가까운 몬스터 찾기
         foreach (var monster in monsterManager.Monsters)
         {

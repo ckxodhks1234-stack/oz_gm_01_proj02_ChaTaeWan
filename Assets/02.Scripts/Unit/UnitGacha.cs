@@ -8,6 +8,7 @@ public class UnitGacha : MonoBehaviour
     [SerializeField] private PlayerGold playerGold;
     [SerializeField] private PoolManager poolManager;
     [SerializeField] private UnitManager unitManager;
+    [SerializeField] private MonsterManager monsterManager;
 
     [Header("¼³Á¤")]
     [SerializeField] private int gachaCost;
@@ -52,7 +53,7 @@ public class UnitGacha : MonoBehaviour
                     spawnPos, randomUnit.unitPrefab.transform.rotation);
 
                 UnitBase unitBase = unitObj.GetComponent<UnitBase>();
-                unitBase.Init(randomUnit, poolManager);
+                unitBase.Init(randomUnit, poolManager, monsterManager);
 
                 unitManager.AddUnit(unitBase);
             }

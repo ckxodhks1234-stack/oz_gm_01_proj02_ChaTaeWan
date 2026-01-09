@@ -31,7 +31,7 @@ public class MonsterBase : MonoBehaviour
         monsterManager.Monsters.Add(this);
         if(monsterManager.Monsters.Count > 0)
         {
-            Debug.Log($"현재 몬스터 수 : {monsterManager.Monsters.Count}");
+            //Debug.Log($"현재 몬스터 수 : {monsterManager.Monsters.Count}");
         }
     }
 

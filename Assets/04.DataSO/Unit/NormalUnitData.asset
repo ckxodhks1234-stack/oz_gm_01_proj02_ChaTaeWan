@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e36811befaedcc46807e40f43838adc, type: 3}
-  m_Name: WuKongData
+  m_Name: NormalUnitData
   m_EditorClassIdentifier: 
-  unitName: WuKong
-  unitPrefab: {fileID: 5224730394167643583, guid: 429eb777789ff694ea16058c6b4974c1, type: 3}
+  unitName: NormalUnit
+  unitPrefab: {fileID: 3702831835322023339, guid: 63c614898cf52cc46beed72bcda755ee, type: 3}
   unitGrade: 0
   attackDamage: 10
   attackCoolTime: 2
-  attackRange: 5
+  attackRange: 12
   moveSpeed: 10
-  unitChance: 0.005
-  bulletPrefab: {fileID: 378572675422461953, guid: b1681c15369f1c5498fa5ec49453f932, type: 3}
-  bulletSpeed: 30
+  unitChance: 50
+  bulletPrefab: {fileID: 8214234702709673263, guid: 6ee2bb77532601448a689d090055021b, type: 3}
+  bulletSpeed: 10

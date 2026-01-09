@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e36811befaedcc46807e40f43838adc, type: 3}
-  m_Name: NarutoData
+  m_Name: WuKongData
   m_EditorClassIdentifier: 
-  unitName: Naruto
-  unitPrefab: {fileID: 5905287590733678916, guid: 74532c8b60b103d4c892d3f7664f5cc1, type: 3}
+  unitName: WuKong
+  unitPrefab: {fileID: 5224730394167643583, guid: 429eb777789ff694ea16058c6b4974c1, type: 3}
   unitGrade: 0
-  attackDamage: 10
+  attackDamage: 250
   attackCoolTime: 2
-  attackRange: 5
+  attackRange: 16
   moveSpeed: 10
-  unitChance: 0.03
-  bulletPrefab: {fileID: 1875504158060303452, guid: 511c2463312c2fc44ba683103b6ce694, type: 3}
-  bulletSpeed: 10
+  unitChance: 0.5
+  bulletPrefab: {fileID: 378572675422461953, guid: b1681c15369f1c5498fa5ec49453f932, type: 3}
+  bulletSpeed: 30

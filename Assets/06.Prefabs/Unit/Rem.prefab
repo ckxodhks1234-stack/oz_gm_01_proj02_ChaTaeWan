@@ -853,7 +853,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitData: {fileID: 11400000, guid: 74266771a562f5240b43a56c4f9a54f1, type: 2}
-  monsterManager: {fileID: 6815759124153151818, guid: e13191ff53f2bc947a86017d1106a729, type: 3}
   selectCircle: {fileID: 3055797835342854098}
   attackBeforeDelay: 0.2
 --- !u!136 &6771106130058616626
@@ -890,7 +889,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 10
-  m_Acceleration: 8
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
