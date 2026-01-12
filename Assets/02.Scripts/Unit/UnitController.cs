@@ -17,6 +17,8 @@ public class UnitController : MonoBehaviour
     private float searchTimer;
     private float searchDelay = 0.2f;
 
+    [SerializeField] private GameObject clickMarkerPrefab;
+
     private void Awake()
     {
         whiteTex = new Texture2D(1, 1);
@@ -82,8 +84,9 @@ public class UnitController : MonoBehaviour
         {
             //유닛 이동
             Vector3 targetPos = hitInfo.point;
+            SpawnClickMarker(targetPos);
 
-            for(int i = 0; i < selectedUnits.Count; i++)
+            for (int i = 0; i < selectedUnits.Count; i++)
             {
                 //유닛 많으면 주변으로 이동하게 함
                 Vector2 randomOffset = UnityEngine.Random.insideUnitCircle * (selectedUnits.Count * 0.2f);
@@ -146,5 +149,11 @@ public class UnitController : MonoBehaviour
         DrawScreenRect(new Rect(rect.xMax - thickness, rect.yMin, thickness, rect.height), color);
         //Down
         DrawScreenRect(new Rect(rect.xMin, rect.yMax - thickness, rect.width, thickness), color);
+    }
+
+    private void SpawnClickMarker(Vector3 pos)
+    {
+        pos.y += 0.1f; //바닥 살짝 위
+        Instantiate(clickMarkerPrefab, pos, clickMarkerPrefab.transform.rotation);
     }
 }

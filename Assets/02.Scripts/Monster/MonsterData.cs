@@ -10,5 +10,5 @@ public class MonsterData : ScriptableObject
     public GameObject monsterPrefab;
 
     [Header("몬스터 보상")]
-    public int gold;
+    public int monsterGold;
 }

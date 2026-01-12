@@ -16,7 +16,10 @@ public class Bullet : MonoBehaviour
         poolManager = pool;
         bulletPrefab = prefab;
 
-        transform.rotation = Quaternion.LookRotation((targetMonster.transform.position - transform.position).normalized);
+        if (targetMonster != null)
+        {
+            transform.rotation = Quaternion.LookRotation((targetMonster.transform.position - transform.position).normalized);
+        }
     }
 
     void Update()

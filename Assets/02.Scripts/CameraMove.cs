@@ -4,6 +4,7 @@ public class CameraMove : MonoBehaviour
 {
     [SerializeField] private float cameraSpeed = 10f;
     [SerializeField] private float edgeSize = 10f; //마우스 가장자리 감지 크기
+    [SerializeField] private float maxDist = 50f;
 
     void Update()
     {
@@ -27,6 +28,10 @@ public class CameraMove : MonoBehaviour
         //아래쪽 끝
         if (mousePos.y <= edgeSize)
             pos.z += cameraSpeed * Time.deltaTime;
+
+        //카메라 이동 범위 제한
+        pos.x = Mathf.Clamp(pos.x, -maxDist, maxDist);
+        pos.z = Mathf.Clamp(pos.z, -maxDist, maxDist);
 
         transform.position = pos;
     }

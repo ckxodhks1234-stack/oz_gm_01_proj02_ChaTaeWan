@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class GameTimer : MonoBehaviour
 {
+    [Header("참조")]
     [SerializeField] private MonsterSpawner monsterSpawner;
+    [SerializeField] private BGMController bgmController;
 
+    [Header("설정")]
     [SerializeField] private float waveTime;
     [SerializeField] private float restTime;
     [SerializeField] private TextMeshProUGUI waveTimerText;
@@ -12,6 +15,7 @@ public class GameTimer : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI waveIndexText;
     private int currentWaveIndex = 1;
+    private bool isGameOver;
 
     private enum TimerState
     {
@@ -29,22 +33,32 @@ public class GameTimer : MonoBehaviour
 
     void Update()
     {
-        currentTime -= Time.deltaTime;
-
-        if (currentTime <= 0)
+        if(currentState == TimerState.Wave)
         {
-            currentTime = 0;
+            currentTime -= Time.deltaTime;
 
-            if (currentState == TimerState.Wave)
+            if(currentTime <= 0)
+            {
+                GameOver();
+                return;
+            }
+            //웨이브 종료조건
+            if(monsterSpawner.waveSpawnFinish && monsterSpawner.MonsterCount == 0)
             {
                 EndWave();
+                return;
             }
-            else if (currentState == TimerState.Rest)
+        }
+        if (currentState == TimerState.Rest)
+        {
+            currentTime -= Time.deltaTime;
+
+            if (currentTime <= 0)
             {
+                currentTime = 0;
                 StartWave();
             }
         }
-
         TimeUI();
     }
 
@@ -62,6 +76,10 @@ public class GameTimer : MonoBehaviour
         waveIndexText.text = $"Wave {currentWaveIndex}";
         monsterSpawner.SetWave(currentWaveIndex);
 
+        //웨이브에 맞는 BGM
+        WaveData wave = monsterSpawner.CurrentWave;
+        bgmController.PlayBGM(wave.bgm);
+
         //몬스터 스폰
         monsterSpawner.StartSpawn();
     }
@@ -77,6 +95,19 @@ public class GameTimer : MonoBehaviour
         restTimerText.gameObject.SetActive(true);
 
         //몬스터 스폰 종료
+        monsterSpawner.StopSpawn();
+
+        currentWaveIndex++;
+    }
+
+    private void GameOver()
+    {
+        if (isGameOver) return;
+
+        isGameOver = true;
+        Time.timeScale = 0f;
+        Debug.Log("게임 오버");
+
         monsterSpawner.StopSpawn();
     }
 

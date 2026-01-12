@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376c5c4000dff3c4f802543858518599, type: 3}
+  m_Name: Wave2
+  m_EditorClassIdentifier: 
+  waveIndex: 2
+  spawnInterval: 2
+  maxSpawnCount: 30
+  waveMonsters:
+  - monsterData: {fileID: 11400000, guid: b1a1ff2477d63ec48bbac35143789c11, type: 2}
+    monsterSpawnCount: 30
+  bgm: {fileID: 8300000, guid: 2dc00c0b5123cbc4ea703624b7b7e312, type: 3}

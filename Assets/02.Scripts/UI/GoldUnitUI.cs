@@ -32,6 +32,6 @@ public class GoldUnitUI : MonoBehaviour
 
     private void UpdateMonsterCount()
     {
-        enemyText.text = $"Monster: {monsterManager.Monsters.Count} / {monsterManager.maxMonsterCount}";
+        enemyText.text = $"Remain Monster: {monsterManager.Monsters.Count}";
     }
 }

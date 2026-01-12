@@ -17,7 +17,7 @@ public class PlayerGold : MonoBehaviour
         }
     }
 
-    public void Earn(int amount)
+    public void GetGold(int amount)
     {
         currentGold += amount;
     }

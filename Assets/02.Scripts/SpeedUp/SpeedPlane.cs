@@ -7,8 +7,7 @@ public class SpeedPlane : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SpeedUnitController speedUnit = other.GetComponentInParent<SpeedUnitController>();
-        if (speedUnit != null)
+        if (other.GetComponentInParent<SpeedUnitController>() != null)
         {
             speedController.SetSpeed(timeScale);
         }

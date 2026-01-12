@@ -1,17 +1,19 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class SpeedUnitController : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    [SerializeField] private SpeedUnit speedUnit;
+    private bool isSelected;
 
-    private void Awake()
+    public void SetSelected(bool selected)
     {
-        agent = GetComponent<NavMeshAgent>();
+        isSelected = selected;
     }
 
     void Update()
     {
+        if(!isSelected) return;
+
         if (Input.GetMouseButtonDown(1))
         {
             MoveSpeedUnit();
@@ -23,7 +25,7 @@ public class SpeedUnitController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
-            agent.SetDestination(hit.point);
+            speedUnit.MoveTo(hit.point);
         }
     }
 }

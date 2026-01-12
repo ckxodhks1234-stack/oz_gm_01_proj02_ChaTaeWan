@@ -10,13 +10,16 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] private List<WaveData> waveDataList;
 
     private WaveData currentWave;
+    public WaveData CurrentWave => currentWave;
+    public int MonsterCount => monsterManager.currentMonsterCount;
+    public bool waveSpawnFinish => spawnRoutine == null && monsterManager.currentMonsterCount == 0;
+
+
     private Coroutine spawnRoutine;
 
-    public void Spawn()
+    public void Spawn(MonsterData data)
     {
-        if (currentWave == null || currentWave.spawnMonsters.Count == 0) return;
-
-        MonsterData data =currentWave.spawnMonsters[Random.Range(0, currentWave.spawnMonsters.Count)];
+        if (data == null) return;
 
         GameObject monsterObj = poolManager.SpawnPool(data.monsterPrefab, wayPointPath.points[0].position, Quaternion.identity);
 
@@ -39,7 +42,7 @@ public class MonsterSpawner : MonoBehaviour
         //} 아래줄이 람다식으로 변경한 것
         currentWave = waveDataList.Find(w => w.waveIndex == waveIndex);
 
-        if (currentWave == null) return;
+        if (currentWave == null || monsterManager == null) return;
         Debug.Log($"현재 웨이브 : {currentWave.waveIndex}");
     }
 
@@ -62,15 +65,18 @@ public class MonsterSpawner : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        while (true)
+        if (currentWave == null) yield break;
+
+        //웨이브몬스터에 설정된 몬스터 순차적으로 스폰
+        foreach(WaveMonster waveMonster in currentWave.waveMonsters)
         {
-            //맥스카운트가 될 때까지 계속 스폰
-            if (monsterManager.Monsters.Count < monsterManager.maxMonsterCount)
+            //설정된 몬스터 수만큼 스폰
+            for (int i = 0; i < waveMonster.monsterSpawnCount; i++)
             {
-                Spawn();
+                Spawn(waveMonster.monsterData);
+                yield return new WaitForSeconds(currentWave.spawnInterval);
             }
-            //웨이브별 인터벌만큼 기다리기
-            yield return new WaitForSeconds(currentWave.spawnInterval);
         }
+        spawnRoutine = null;
     }
 }

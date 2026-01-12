@@ -36,7 +36,7 @@ public class UnitBase : MonoBehaviour
         poolManager = pool;
         monsterManager = manager;
 
-        agent = GetComponent<NavMeshAgent>();
+        if(agent == null) agent = GetComponent<NavMeshAgent>();
         agent.enabled = true;
         agent.isStopped = false;
         agent.speed = unitData.moveSpeed;

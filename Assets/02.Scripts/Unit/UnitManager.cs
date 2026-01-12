@@ -10,26 +10,26 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private PoolManager poolManager;
     [SerializeField] private MonsterManager monsterManager;
 
-    private List<UnitBase> units = new List<UnitBase>();
+    private List<UnitBase> Units = new List<UnitBase>();
 
     public bool CanAddUnit()
     {
-        return units.Count < maxUnitCount;
+        return Units.Count < maxUnitCount;
     }
 
     public void AddUnit(UnitBase unit)
     {
-        units.Add(unit);
+        Units.Add(unit);
     }
 
     public void RemoveUnit(UnitBase unit)
     {
-        units.Remove(unit);
+        Units.Remove(unit);
     }
 
     public int GetUnitCount()
     {
-        return units.Count;
+        return Units.Count;
     }
 
     //합성 시도
@@ -101,7 +101,7 @@ public class UnitManager : MonoBehaviour
     {
         List<UnitBase> result = new List<UnitBase>();
 
-        foreach (var unit in units)
+        foreach (var unit in Units)
         {
             if (unit.UnitData.unitGrade == grade)
             {

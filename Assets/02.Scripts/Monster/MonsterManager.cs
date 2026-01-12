@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MonsterManager : MonoBehaviour
 {
-    public int currentMonsterCount;
-    public int maxMonsterCount;
+    [SerializeField] private PlayerGold playerGold;
+    public int currentMonsterCount => Monsters.Count;
 
     public List<MonsterBase> Monsters { get; private set; } = new List<MonsterBase>();
 
@@ -15,7 +15,6 @@ public class MonsterManager : MonoBehaviour
         {
             Monsters.Add(monster);
             //currentMonsterCount++;
-            CheckGameOver();
         }
     }
 
@@ -29,13 +28,8 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    private void CheckGameOver()
+    public void GiveGold(int amount)
     {
-        if (currentMonsterCount >= maxMonsterCount)
-        {
-            Time.timeScale = 0f;
-            Debug.Log("게임오버");
-            //UI추가
-        }
+        playerGold.GetGold(amount);
     }
 }
