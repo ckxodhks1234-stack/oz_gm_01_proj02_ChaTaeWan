@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpeedUnitSelect : MonoBehaviour
 {
-    [SerializeField] private SpeedUnitController speedUnitController;
+    private SpeedUnitController currentSelected;
 
     void Update()
     {
@@ -17,14 +17,26 @@ public class SpeedUnitSelect : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
-            if (hit.collider.GetComponentInParent<SpeedUnitController>() != null)
+            SpeedUnitController hitUnit = hit.collider.GetComponentInParent<SpeedUnitController>();
+
+            if (hitUnit != null)
             {
-                speedUnitController.SetSelected(true);
+                //기존 선택 해제
+                if (currentSelected != null)
+                {
+                    currentSelected.SetSelected(false);
+                }
+                currentSelected = hitUnit;
+                currentSelected.SetSelected(true);
             }
             else
             {
-                //다른 곳 클릭 - 선택 해제
-                speedUnitController.SetSelected(false);
+                //빈 공간 클릭
+                if (currentSelected != null)
+                {
+                    currentSelected.SetSelected(false);
+                }
+                currentSelected = null;
             }
         }
     }

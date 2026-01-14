@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Naruto
   unitPrefab: {fileID: 5905287590733678916, guid: 74532c8b60b103d4c892d3f7664f5cc1, type: 3}
-  unitGrade: 0
+  unitGrade: 4
+  icon: {fileID: 21300000, guid: e04b73bd85b5c6e4d9eacf430463284b, type: 3}
   attackDamage: 120
   attackCoolTime: 2
   attackRange: 16

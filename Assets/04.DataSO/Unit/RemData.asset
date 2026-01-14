@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Rem
   unitPrefab: {fileID: 3167198120740137105, guid: bd6f14180517f5a4e9d87664bd15197e, type: 3}
-  unitGrade: 0
+  unitGrade: 3
+  icon: {fileID: 21300000, guid: f0431161f294a0c4ca159a48a21b900d, type: 3}
   attackDamage: 70
   attackCoolTime: 2
-  attackRange: 14
+  attackRange: 12
   moveSpeed: 10
   unitChance: 5
   bulletPrefab: {fileID: 5490131268878727932, guid: dd8b724579120454881ed3d56c3774c5, type: 3}

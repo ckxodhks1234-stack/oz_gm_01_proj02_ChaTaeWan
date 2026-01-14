@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static PoolManager;
 
 public class PoolManager : MonoBehaviour
 {
@@ -18,8 +19,18 @@ public class PoolManager : MonoBehaviour
 
     private void Awake()
     {
+        if (poolDictionary == null) poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
+        if (pools == null || pools.Count == 0)
+        {
+            Debug.LogWarning("PoolManager pools 리스트가 비어있음");
+            return;
+        }
+        Debug.Log($"풀 카운트 {pools.Count}, 풀 {pools}");
+
         foreach (var pool in pools)
         {
+            Debug.Log($"Pool 등록 {pool.prefab.name} / instanceID: {pool.prefab.GetInstanceID()}");
+
             //오브젝트 큐 생성
             Queue<GameObject> objectQ = new Queue<GameObject>();
 
@@ -37,7 +48,14 @@ public class PoolManager : MonoBehaviour
 
     public GameObject SpawnPool(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        if (!poolDictionary.ContainsKey(prefab)) return null;
+        string keys = string.Join(", ", poolDictionary.Keys);
+        Debug.Log($"현재 풀 목록: {keys} / 찾는 키: {prefab.name}");
+        Debug.Log($"SpawnPool 스폰 {prefab.name} / instanceID: {prefab.GetInstanceID()}");
+        if (!poolDictionary.ContainsKey(prefab))
+        {
+            Debug.LogError($"풀에 등록 안됨: {prefab.name}");
+            return null;
+        }
 
         GameObject obj;
 
@@ -49,7 +67,7 @@ public class PoolManager : MonoBehaviour
         else
         {
             //큐가 비어있으면 새로 생성
-            obj = Instantiate(prefab);
+            obj = Instantiate(prefab, transform);
         }
 
         obj.transform.SetPositionAndRotation(position, rotation);

@@ -1,16 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour
 {
     [SerializeField] public int maxUnitCount = 30;
-    [SerializeField] private float synthesisSuccessRate = 0.7f;
 
     [SerializeField] private List<UnitData> unitDataList;
     [SerializeField] private PoolManager poolManager;
     [SerializeField] private MonsterManager monsterManager;
 
     private List<UnitBase> Units = new List<UnitBase>();
+
+    public event Action UnitChanged;
 
     public bool CanAddUnit()
     {
@@ -20,11 +22,13 @@ public class UnitManager : MonoBehaviour
     public void AddUnit(UnitBase unit)
     {
         Units.Add(unit);
+        UnitChanged?.Invoke();
     }
 
     public void RemoveUnit(UnitBase unit)
     {
         Units.Remove(unit);
+        UnitChanged?.Invoke();
     }
 
     public int GetUnitCount()
@@ -32,72 +36,23 @@ public class UnitManager : MonoBehaviour
         return Units.Count;
     }
 
-    //합성 시도
-    private bool TrySynthesis(UnitGrade grade)
+    //특정등급 유닛 수 가져오기
+    public int GetUnitCountByGrade(UnitGrade grade)
     {
-        //모든 유닛의 등급이 동일한지 확인
-        List<UnitBase> candidates = GetUnitByGrade(grade);
-
-        if(candidates.Count < 3) return false; //합성할 유닛이 부족
-
-        //최고등급이면 합성 불가
-        if (grade == UnitGrade.WuKong) return false;
-
-        //합성 유닛 3개 선택
-        List<UnitBase> synthesisUnits = new List<UnitBase>
+        int count = 0;
+        //유닛 리스트에서 등급 같은 것끼리 숫자 올리기
+        foreach (var unit in Units)
         {
-            candidates[0],
-            candidates[1],
-            candidates[2]
-        };
-
-        ExecuteSynthesis(synthesisUnits);
-        return true;
-    }
-
-    //합성 처리
-    private void ExecuteSynthesis(List<UnitBase> synthesisUnits)
-    {
-        //합성 유닛 등급과 위치 저장
-        UnitGrade currentGrade = synthesisUnits[0].UnitData.unitGrade;
-        Vector3 spawnPos = synthesisUnits[0].transform.position;
-
-        //합성 유닛 없애기
-        foreach (var unit in synthesisUnits)
-        {
-            RemoveUnit(unit);
-            unit.ReturnPoolUnit();
+            if (unit.UnitData.unitGrade == grade)
+            {
+                count++;
+            }
         }
-
-        bool success = Random.value <= synthesisSuccessRate;
-        if (!success)
-        {
-            //실패하면 원래 등급 1개 생성
-            UnitData failUnitData = GetUnitDataByGrade(currentGrade);
-            SpawnUnit(failUnitData, spawnPos);
-            return;
-        }
-
-        //새로운 유닛 생성
-        UnitGrade newGrade = currentGrade + 1;
-        UnitData newUnitData = GetUnitDataByGrade(newGrade);
-
-        if(newUnitData == null) return;
-
-        SpawnUnit(newUnitData, spawnPos);
-    }
-
-    //유닛 생성
-    private void SpawnUnit(UnitData unitData, Vector3 pos)
-    {
-        GameObject unitObj = poolManager.SpawnPool(unitData.unitPrefab, pos, Quaternion.identity);
-        UnitBase unitBase = unitObj.GetComponent<UnitBase>();
-        unitBase.Init(unitData, poolManager, monsterManager);
-        AddUnit(unitBase);
+        return count;
     }
 
     //특정 등급 유닛 가져오기
-    private List<UnitBase> GetUnitByGrade(UnitGrade grade)
+    public List<UnitBase> GetUnitByGrade(UnitGrade grade)
     {
         List<UnitBase> result = new List<UnitBase>();
 
@@ -111,8 +66,54 @@ public class UnitManager : MonoBehaviour
         return result;
     }
 
+    public void RemoveUnitsByGrade(UnitGrade grade, int count)
+    {
+        int removed = 0;
+
+        for (int i = Units.Count - 1; i >= 0; i--)
+        {
+            if (Units[i].UnitData.unitGrade == grade)
+            {
+                Units[i].ReturnPoolUnit();
+                Units.RemoveAt(i);
+                removed++;
+                UnitChanged?.Invoke();
+
+                if (removed >= count) break;
+            }
+        }
+    }
+
+    //유닛 생성
+    public void SpawnUnit(UnitData unitData, Vector3 pos)
+    {
+        if (unitData == null || unitData.unitPrefab == null)
+        {
+            Debug.LogError("UnitData 또는 프리팹이 비어있음");
+            return;
+        }
+
+        GameObject unitObj = poolManager.SpawnPool(unitData.unitPrefab, pos, Quaternion.identity);
+        if (unitObj == null)
+        {
+            Debug.LogError("SpawnPool 오브젝트 없음: " + unitData.unitPrefab.name);
+            return;
+        }
+        UnitBase unitBase = unitObj.GetComponent<UnitBase>();
+        if (unitBase == null)
+        {
+            Debug.LogError("UnitBase 없음: " + unitObj.name);
+        }
+        unitBase.Init(unitData, poolManager, monsterManager);
+        if (unitBase.UnitData == null)
+        {
+            Debug.LogError($"{unitObj.name}의 UnitData Init null");
+        }
+        AddUnit(unitBase);
+    }
+
     //등급에 맞는 유닛 데이터 가져오기
-    private UnitData GetUnitDataByGrade(UnitGrade grade)
+    public UnitData GetUnitDataByGrade(UnitGrade grade)
     {
         foreach (var data in unitDataList)
         {
@@ -122,5 +123,21 @@ public class UnitManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public List<UnitBase> GetUnits()
+    {
+        return Units;
+    }
+
+    public int GetUnitCountByData(UnitData data)
+    {
+        int count = 0;
+        foreach (var unit in Units)
+        {
+            if (unit != null && unit.UnitData == data)
+                count++;
+        }
+        return count;
     }
 }

@@ -38,26 +38,15 @@ public class UnitGacha : MonoBehaviour
         }
         if (!unitManager.CanAddUnit()) return;
 
-        if (playerGold != null && playerGold.CanSpend(gachaCost))
-        {
-            UnitData randomUnit = GetRandomUnit();
+        UnitData randomUnit = GetRandomUnit();
 
-            if (randomUnit == null) return;
-            if (randomUnit != null)
-            {
-                playerGold.Spend(gachaCost);
+        if (randomUnit == null) return;
 
-                Vector3 spawnPos = GetUnitPosition();
+        playerGold.Spend(gachaCost);
 
-                GameObject unitObj = poolManager.SpawnPool(randomUnit.unitPrefab,
-                    spawnPos, randomUnit.unitPrefab.transform.rotation);
+        Vector3 spawnPos = GetUnitPosition();
 
-                UnitBase unitBase = unitObj.GetComponent<UnitBase>();
-                unitBase.Init(randomUnit, poolManager, monsterManager);
-
-                unitManager.AddUnit(unitBase);
-            }
-        }
+        unitManager.SpawnUnit(randomUnit, spawnPos);
     }
 
     private UnitData GetRandomUnit()

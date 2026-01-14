@@ -17,6 +17,7 @@ public class UnitData : ScriptableObject
     public string unitName;
     public GameObject unitPrefab;
     public UnitGrade unitGrade;
+    public Sprite icon;
 
     [Header("유닛 능력치")]
     public int attackDamage;

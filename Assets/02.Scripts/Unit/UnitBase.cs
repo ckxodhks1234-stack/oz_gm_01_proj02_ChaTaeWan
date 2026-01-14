@@ -32,11 +32,17 @@ public class UnitBase : MonoBehaviour
 
     public void Init(UnitData data, PoolManager pool, MonsterManager manager)
     {
-        unitData = data;
-        poolManager = pool;
-        monsterManager = manager;
+        this.unitData = data;
+        this.UnitData = data;
+        this.poolManager = pool;
+        this.monsterManager = manager;
 
-        if(agent == null) agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            Debug.LogError($"{gameObject.name} ¿¡ NavMeshAgent ¾øÀ½");
+            return;
+        }
         agent.enabled = true;
         agent.isStopped = false;
         agent.speed = unitData.moveSpeed;
