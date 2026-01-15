@@ -9,6 +9,8 @@ public class UnitGacha : MonoBehaviour
     [SerializeField] private PoolManager poolManager;
     [SerializeField] private UnitManager unitManager;
     [SerializeField] private MonsterManager monsterManager;
+    [SerializeField] private UnitResultUI unitResultUI;
+    [SerializeField] private UnitResultPanel unitResultPanel;
 
     [Header("¼³Á¤")]
     [SerializeField] private int gachaCost;
@@ -19,6 +21,33 @@ public class UnitGacha : MonoBehaviour
     [SerializeField] private LayerMask unitLayer;
 
     private float gachaTimer;
+    private float totalChance;
+
+    private void Awake()
+    {
+        foreach(var data in unitDataList)
+        {
+            totalChance += data.unitChance;
+        }
+    }
+
+    private void Start()
+    {
+        unitManager.UnitSpawned += GachaResult;
+    }
+
+    private void OnDestroy()
+    {
+        unitManager.UnitSpawned -= GachaResult;
+    }
+
+    private void GachaResult(UnitData data, UnitResult result)
+    {
+        if (result != UnitResult.Gacha) return;
+
+        float percent = (data.unitChance / totalChance) * 100f;
+        unitResultPanel.AddResult(data, "Gacha Result", percent);
+    }
 
     private void Update()
     {
@@ -46,7 +75,7 @@ public class UnitGacha : MonoBehaviour
 
         Vector3 spawnPos = GetUnitPosition();
 
-        unitManager.SpawnUnit(randomUnit, spawnPos);
+        unitManager.SpawnUnit(randomUnit, spawnPos, UnitResult.Gacha);
     }
 
     private UnitData GetRandomUnit()

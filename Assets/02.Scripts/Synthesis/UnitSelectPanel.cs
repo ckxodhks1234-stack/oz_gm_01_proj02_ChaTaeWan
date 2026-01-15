@@ -36,7 +36,7 @@ public class UnitSelectPanel : MonoBehaviour
         {
             if (unit == null || unit.UnitData == null)
             {
-                Debug.LogWarning("UnitData가 없음");
+                Debug.Log("UnitData가 없음");
                 continue;
             }
             //최고등급은 안나오게

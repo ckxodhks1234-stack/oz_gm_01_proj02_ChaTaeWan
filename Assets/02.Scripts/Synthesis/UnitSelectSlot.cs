@@ -19,6 +19,7 @@ public class UnitSelectSlot : MonoBehaviour
         iconImage.sprite = data.icon;
         iconImage.color = Color.white;
 
+        if (countText.text == null) Debug.Log("카운트 텍스트 없음");
         countText.text = count.ToString();
 
         button.interactable = count > 0; //버튼 0보다 커야 활성화

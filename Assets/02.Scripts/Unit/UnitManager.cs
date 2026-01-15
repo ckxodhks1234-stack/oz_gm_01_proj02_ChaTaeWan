@@ -2,6 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum UnitResult
+{
+    Gacha,
+    Synthesis
+}
+
 public class UnitManager : MonoBehaviour
 {
     [SerializeField] public int maxUnitCount = 30;
@@ -13,6 +19,7 @@ public class UnitManager : MonoBehaviour
     private List<UnitBase> Units = new List<UnitBase>();
 
     public event Action UnitChanged;
+    public event Action<UnitData, UnitResult> UnitSpawned;
 
     public bool CanAddUnit()
     {
@@ -22,7 +29,7 @@ public class UnitManager : MonoBehaviour
     public void AddUnit(UnitBase unit)
     {
         Units.Add(unit);
-        UnitChanged?.Invoke();
+        UnitChanged?.Invoke(); //유닛 변화생기면 이벤트 실행
     }
 
     public void RemoveUnit(UnitBase unit)
@@ -85,7 +92,7 @@ public class UnitManager : MonoBehaviour
     }
 
     //유닛 생성
-    public void SpawnUnit(UnitData unitData, Vector3 pos)
+    public void SpawnUnit(UnitData unitData, Vector3 pos, UnitResult result)
     {
         if (unitData == null || unitData.unitPrefab == null)
         {
@@ -110,6 +117,8 @@ public class UnitManager : MonoBehaviour
             Debug.LogError($"{unitObj.name}의 UnitData Init null");
         }
         AddUnit(unitBase);
+
+        UnitSpawned?.Invoke(unitData, result);
     }
 
     //등급에 맞는 유닛 데이터 가져오기

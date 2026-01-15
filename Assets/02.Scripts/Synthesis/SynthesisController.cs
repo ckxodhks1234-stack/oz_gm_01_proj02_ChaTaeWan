@@ -7,6 +7,8 @@ public class SynthesisController : MonoBehaviour
     [SerializeField] private UnitManager unitManager;
     [SerializeField] private PlayerGold playerGold;
     [SerializeField] private SynthesisUI synthesisUI;
+    [SerializeField] private UnitResultUI unitResultUI;
+    [SerializeField] private UnitResultPanel unitResultPanel;
 
     [Header("설정")]
     [SerializeField] private int synthesisCount = 3;
@@ -83,7 +85,10 @@ public class SynthesisController : MonoBehaviour
 
         //결과 데이터 가져와서 스폰
         UnitData resultData = unitManager.GetUnitDataByGrade(resultGrade);
-        unitManager.SpawnUnit(resultData, synthesisSpawnPoint.position);
+        unitManager.SpawnUnit(resultData, synthesisSpawnPoint.position, UnitResult.Synthesis);
+
+        //합성결과 UI
+        unitResultPanel.AddSynthesisResult(success ? "Synthesis success!" : "Synthesis failed..");
 
         selectedUnits.Clear();
         synthesisUI.Refresh(selectedUnits, synthesisCount);
