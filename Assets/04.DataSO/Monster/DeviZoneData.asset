@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeviZoneData
   m_EditorClassIdentifier: 
   monsterName: DeviZone
-  monsterMaxHp: 100
+  monsterMaxHp: 1000
   monsterMoveSpeed: 5
   monsterPrefab: {fileID: 5235210055129807138, guid: 37b2cda3f62d4134cb28b0663f11921e, type: 3}
-  monsterGold: 15
+  monsterGold: 10

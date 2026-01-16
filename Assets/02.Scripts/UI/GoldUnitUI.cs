@@ -8,10 +8,11 @@ public class GoldUnitUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI unitText;
     [SerializeField] private TextMeshProUGUI enemyText;
 
-    [Header("스크립트")]
+    [Header("참조")]
     [SerializeField] private PlayerGold playerGold;
     [SerializeField] private UnitManager unitManager;
     [SerializeField] private MonsterManager monsterManager;
+    [SerializeField] private MonsterSpawner monsterSpawner;
 
     void Update()
     {
@@ -22,7 +23,7 @@ public class GoldUnitUI : MonoBehaviour
 
     private void UpdateGold()
     {
-        goldText.text = $"{playerGold.currentGold}G";
+        goldText.text = $"{playerGold.currentGold}";
     }
 
     private void UpdateUnitCount()
@@ -32,6 +33,8 @@ public class GoldUnitUI : MonoBehaviour
 
     private void UpdateMonsterCount()
     {
-        enemyText.text = $"Remain Monster: {monsterManager.Monsters.Count}";
+        int alive = monsterManager.Monsters.Count;
+        int total = monsterSpawner.TotalSpawnCount;
+        enemyText.text = $"남은 적: {alive}/{total}";
     }
 }

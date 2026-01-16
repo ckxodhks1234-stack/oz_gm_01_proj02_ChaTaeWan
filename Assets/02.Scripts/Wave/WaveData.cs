@@ -21,4 +21,17 @@ public class WaveData : ScriptableObject
 
     [Header("BGM")]
     public AudioClip bgm;
+
+    public int TotalMonsterCount
+    {
+        get
+        {
+            int total = 0;
+            foreach(var wm in waveMonsters)
+            {
+                total += wm.monsterSpawnCount;
+            }
+            return total;
+        }
+    }
 }

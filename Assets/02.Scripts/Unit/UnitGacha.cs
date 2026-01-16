@@ -46,7 +46,7 @@ public class UnitGacha : MonoBehaviour
         if (result != UnitResult.Gacha) return;
 
         float percent = (data.unitChance / totalChance) * 100f;
-        unitResultPanel.AddResult(data, "Gacha Result", percent);
+        unitResultPanel.AddResult(data, "»Ì±â °á°ú", percent);
     }
 
     private void Update()

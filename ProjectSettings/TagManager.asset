@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: asd
+    uniqueID: 1362947011
+    locked: 0

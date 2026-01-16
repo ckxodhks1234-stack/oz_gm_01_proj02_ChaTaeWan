@@ -11,6 +11,7 @@ public class MonsterSpawner : MonoBehaviour
 
     private WaveData currentWave;
     public WaveData CurrentWave => currentWave;
+    public int TotalSpawnCount => currentWave.TotalMonsterCount;
     public int MonsterCount => monsterManager.currentMonsterCount;
     public bool waveSpawnFinish => spawnRoutine == null && monsterManager.currentMonsterCount == 0;
 

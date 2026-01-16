@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ManonData
   m_EditorClassIdentifier: 
   monsterName: Manon
-  monsterMaxHp: 100
+  monsterMaxHp: 5000
   monsterMoveSpeed: 5
   monsterPrefab: {fileID: 7524549541526170044, guid: 4ebddb51267689e419eddb4a976eb388, type: 3}
-  monsterGold: 50
+  monsterGold: 30

@@ -88,7 +88,7 @@ public class SynthesisController : MonoBehaviour
         unitManager.SpawnUnit(resultData, synthesisSpawnPoint.position, UnitResult.Synthesis);
 
         //합성결과 UI
-        unitResultPanel.AddSynthesisResult(success ? "Synthesis success!" : "Synthesis failed..");
+        unitResultPanel.AddSynthesisResult(success ? "합성 성공!" : "합성 실패..");
 
         selectedUnits.Clear();
         synthesisUI.Refresh(selectedUnits, synthesisCount);

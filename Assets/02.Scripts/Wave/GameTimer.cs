@@ -5,15 +5,14 @@ public class GameTimer : MonoBehaviour
 {
     [Header("참조")]
     [SerializeField] private MonsterSpawner monsterSpawner;
-    [SerializeField] private BGMController bgmController;
 
     [Header("설정")]
     [SerializeField] private float waveTime;
     [SerializeField] private float restTime;
     [SerializeField] private TextMeshProUGUI waveTimerText;
     [SerializeField] private TextMeshProUGUI restTimerText;
-
     [SerializeField] private TextMeshProUGUI waveIndexText;
+
     private int currentWaveIndex = 1;
     private bool isGameOver;
 
@@ -78,7 +77,7 @@ public class GameTimer : MonoBehaviour
 
         //웨이브에 맞는 BGM
         WaveData wave = monsterSpawner.CurrentWave;
-        bgmController.PlayBGM(wave.bgm);
+        BGMController.Instance.PlayBGM(wave.bgm);
 
         //몬스터 스폰
         monsterSpawner.StartSpawn();
