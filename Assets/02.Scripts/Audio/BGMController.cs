@@ -35,4 +35,9 @@ public class BGMController : MonoBehaviour
     {
         bgmAudioSource.Stop();
     }
+
+    public void SetMute(bool mute)
+    {
+        bgmAudioSource.mute = mute;
+    }
 }

@@ -16,4 +16,4 @@ MonoBehaviour:
   monsterMaxHp: 150
   monsterMoveSpeed: 5
   monsterPrefab: {fileID: 4800390825944725351, guid: 1ec4140f793174f48a75b9ea1cba0f6c, type: 3}
-  monsterGold: 5
+  monsterGold: 1

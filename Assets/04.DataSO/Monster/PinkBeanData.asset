@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PinkBeanData
   m_EditorClassIdentifier: 
   monsterName: PinkBean
-  monsterMaxHp: 30000
+  monsterMaxHp: 50000
   monsterMoveSpeed: 5
   monsterPrefab: {fileID: 883232376428206042, guid: 835cb82c955b5804bb318eba50f92449, type: 3}
   monsterGold: 0

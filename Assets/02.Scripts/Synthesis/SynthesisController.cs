@@ -45,7 +45,7 @@ public class SynthesisController : MonoBehaviour
         int ownedCount = unitManager.GetUnitCountByData(unitData);
         int selectedCount = GetSelectedCount(unitData);
 
-        if (selectedUnits.Count >= ownedCount) return;
+        if (selectedCount >= ownedCount) return;
 
         selectedUnits.Add(unitData);
         synthesisUI.Refresh(selectedUnits, synthesisCount);

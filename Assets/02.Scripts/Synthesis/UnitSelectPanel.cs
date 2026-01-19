@@ -8,7 +8,7 @@ public class UnitSelectPanel : MonoBehaviour
     [SerializeField] private SynthesisController synthesisController;
     [SerializeField] private UnitSelectSlot[] slots;
 
-    [SerializeField] private UnitGrade maxGrade = UnitGrade.WuKong;
+    [SerializeField] private UnitGrade maxGrade = UnitGrade.TaeCho;
 
     private void OnEnable()
     {

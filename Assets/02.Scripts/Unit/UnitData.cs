@@ -5,10 +5,10 @@ public enum UnitGrade
     Normal,
     Rare,
     Epic,
-    Rem,
-    Naruto,
-    TwoB,
-    WuKong
+    Unique,
+    Legendary,
+    Chowall,
+    TaeCho
 }
 [CreateAssetMenu(fileName = "UnitData", menuName = "UnitData")]
 public class UnitData : ScriptableObject

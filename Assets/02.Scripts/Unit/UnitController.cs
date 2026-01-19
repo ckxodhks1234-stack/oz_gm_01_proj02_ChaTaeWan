@@ -9,15 +9,14 @@ public class UnitController : MonoBehaviour
     public LayerMask unitLayer;
     public LayerMask groundLayer;
 
+    [SerializeField] private float dragThreshold = 1f;
     private bool isDragging;
 
     //드래그 사각형을 그릴 때 사용할 Texture
     private static Texture2D whiteTex;
 
-    private float searchTimer;
-    private float searchDelay = 0.2f;
-
     [SerializeField] private GameObject clickMarkerPrefab;
+    [SerializeField] private UnitInfoPanel unitInfoPanel;
 
     private void Awake()
     {
@@ -38,18 +37,57 @@ public class UnitController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
-            SelectUnits();
+
+            //드래그 작으면 하나만 선택
+            if (Vector3.Distance(startMousePos, Input.mousePosition) < dragThreshold)
+            {
+                SelectSingleUnit();
+            }
+            else
+            {
+                SelectUnitsBox();
+            }
         }
         //우클릭 이동
-        if (Input.GetMouseButtonDown(1) && selectedUnits.Count > 0)
+        if (Input.GetMouseButtonDown(1))
         {
-            MoveUnits();
+            if (selectedUnits.Count > 0)
+            {
+                MoveUnits();
+            }
         }
     }
 
-    private void SelectUnits()
+    private void SelectSingleUnit()
     {
-        //드래그 거리 짧으면 단일 선택
+        //기존 선택 해제
+        foreach (var unit in selectedUnits)
+        {
+            if(unit != null) unit.Selected(false);
+        }
+        selectedUnits.Clear();
+
+        //마우스 위치 레이 발사
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, unitLayer))
+        {
+            UnitBase unit = hit.collider.GetComponentInParent<UnitBase>();
+            if (unit != null)
+            {
+                selectedUnits.Add(unit);
+                unit.Selected(true);
+
+                //유닛 정보 패널 나타내기
+                unitInfoPanel.Show(unit.UnitData);
+                return;
+            }
+        }
+        //유닛 안찍었으면 패널 숨기기
+        else unitInfoPanel.Hide();
+    }
+
+    private void SelectUnitsBox()
+    {
         Vector3 endMousePos = Input.mousePosition;
         Rect selectionRect = GetScreenRect(startMousePos, endMousePos);
 
@@ -123,7 +161,7 @@ public class UnitController : MonoBehaviour
     {
         if (!isDragging) return;
 
-        if (isDragging)
+        if (Vector3.Distance(startMousePos, Input.mousePosition) > dragThreshold)
         {
             //드래그 사각형 그리기
             Rect rect = GetScreenRect(startMousePos, Input.mousePosition);

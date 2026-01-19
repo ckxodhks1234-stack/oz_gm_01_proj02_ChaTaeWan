@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveIndex: 10
   spawnInterval: 5
-  maxSpawnCount: 25
   waveMonsters:
   - monsterData: {fileID: 11400000, guid: 067367d55a20c644cb5c3e704a5683be, type: 2}
-    monsterSpawnCount: 20
+    monsterSpawnCount: 10
   - monsterData: {fileID: 11400000, guid: b7ea5a98035c77f4d9794951540d64ca, type: 2}
     monsterSpawnCount: 5
   bgm: {fileID: 8300000, guid: f9c8227f40c2c784d8ad0085a5ca10d6, type: 3}
