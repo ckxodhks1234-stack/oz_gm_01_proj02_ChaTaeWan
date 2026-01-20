@@ -24,7 +24,7 @@ public class GameOverUI : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        waveText.text = $"최고: {bestWave}Wave / 현재: {wave}Wave";
+        waveText.text = $"최고 {bestWave}Wave / 현재 {wave}Wave";
     }
 
     public void OnClickRestart()

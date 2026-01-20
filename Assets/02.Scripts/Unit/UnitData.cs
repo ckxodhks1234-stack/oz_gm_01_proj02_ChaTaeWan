@@ -6,7 +6,7 @@ public enum UnitGrade
     Rare,
     Epic,
     Unique,
-    Legendary,
+    Legend,
     Chowall,
     TaeCho
 }
@@ -18,6 +18,10 @@ public class UnitData : ScriptableObject
     public GameObject unitPrefab;
     public UnitGrade unitGrade;
     public Sprite icon;
+
+    [Header("UI")]
+    public Sprite frameSprite;
+    public Color frameColor;
 
     [Header("À¯´Ö ´É·ÂÄ¡")]
     public int attackDamage;

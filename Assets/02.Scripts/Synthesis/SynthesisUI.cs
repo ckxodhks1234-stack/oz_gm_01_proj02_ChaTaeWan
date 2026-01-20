@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SynthesisUI : MonoBehaviour
 {
     [SerializeField] private GameObject synthesisPanel;
-    [SerializeField] private Image[] unitSlots;
+    [SerializeField] private UnitSlot[] unitSlots;
     [SerializeField] private Button synthesisButton;
 
     public void Open()
@@ -19,15 +19,13 @@ public class SynthesisUI : MonoBehaviour
         //슬롯 초기화
         for (int i = 0; i < unitSlots.Length; i++)
         {
-            unitSlots[i].sprite = null;
-            unitSlots[i].color = new Color(1, 1, 1, 0); //투명
+            unitSlots[i].Clear();
         }
 
         // 채워진 개수만큼 아이콘 표시
         for (int i = 0; i < units.Count; i++)
         {
-            unitSlots[i].sprite = units[i].icon;
-            unitSlots[i].color = Color.white;
+            unitSlots[i].Set(units[i]);
         }
 
         synthesisButton.interactable = (units.Count >= max);

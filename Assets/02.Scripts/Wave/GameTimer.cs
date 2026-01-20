@@ -5,6 +5,7 @@ public class GameTimer : MonoBehaviour
 {
     [Header("참조")]
     [SerializeField] private MonsterSpawner monsterSpawner;
+    [SerializeField] private GameOverUI gameOverUI;
 
     [Header("설정")]
     [SerializeField] private float waveTime;
@@ -12,6 +13,7 @@ public class GameTimer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI waveTimerText;
     [SerializeField] private TextMeshProUGUI restTimerText;
     [SerializeField] private TextMeshProUGUI waveIndexText;
+    [SerializeField] private GameObject gameClearPanel;
 
     private int currentWaveIndex = 1;
     private bool isGameOver;
@@ -85,6 +87,15 @@ public class GameTimer : MonoBehaviour
 
     private void EndWave()
     {
+        //몬스터 스폰 종료
+        monsterSpawner.StopSpawn();
+
+        if (monsterSpawner.IsLastWave())
+        {
+            GameClear();
+            return;
+        }
+
         //웨이브 종료
         currentState = TimerState.Rest;
         currentTime = restTime;
@@ -93,10 +104,12 @@ public class GameTimer : MonoBehaviour
         waveTimerText.gameObject.SetActive(false);
         restTimerText.gameObject.SetActive(true);
 
-        //몬스터 스폰 종료
-        monsterSpawner.StopSpawn();
-
         currentWaveIndex++;
+    }
+
+    private void GameClear()
+    {
+
     }
 
     private void GameOver()
@@ -105,6 +118,8 @@ public class GameTimer : MonoBehaviour
 
         isGameOver = true;
         Time.timeScale = 0f;
+        gameOverUI.Show(currentWaveIndex);
+
         Debug.Log("게임 오버");
 
         monsterSpawner.StopSpawn();

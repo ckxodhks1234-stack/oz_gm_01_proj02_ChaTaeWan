@@ -16,6 +16,8 @@ MonoBehaviour:
   unitPrefab: {fileID: 1880109831021814824, guid: 8e815cd1981159d47ab6912ac5358694, type: 3}
   unitGrade: 1
   icon: {fileID: 21300000, guid: cf56c30548f1b9e41a6a782b58b3201c, type: 3}
+  frameSprite: {fileID: 21300000, guid: 7179ab86b28b8184e8b74e3a0b7fa821, type: 3}
+  frameColor: {r: 1, g: 1, b: 1, a: 1}
   attackDamage: 20
   attackCoolTime: 2
   attackRange: 14

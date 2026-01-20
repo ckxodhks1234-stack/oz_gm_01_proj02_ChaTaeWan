@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4125238779289957753}
   - component: {fileID: 2824234781296028451}
   - component: {fileID: 6809857917857147826}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: NormalUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4476835113589885340}
   - component: {fileID: 7957576357804375936}
   - component: {fileID: 8552047411408312111}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: NormalModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 8666722331764508358}
   - component: {fileID: 9021006331167885350}
   - component: {fileID: 3950399764299358541}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Quad (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

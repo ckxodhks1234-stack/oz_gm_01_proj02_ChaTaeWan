@@ -11,6 +11,8 @@ public class MonsterSpawner : MonoBehaviour
 
     private WaveData currentWave;
     public WaveData CurrentWave => currentWave;
+    public int TotalWaveCount => waveDataList.Count;
+    public int CurrentWaveIndex => currentWave.waveIndex;
     public int TotalSpawnCount => currentWave.TotalMonsterCount;
     public int MonsterCount => monsterManager.currentMonsterCount;
     public bool waveSpawnFinish => spawnRoutine == null && monsterManager.currentMonsterCount == 0;
@@ -47,6 +49,10 @@ public class MonsterSpawner : MonoBehaviour
         Debug.Log($"현재 웨이브 : {currentWave.waveIndex}");
     }
 
+    public bool IsLastWave()
+    {
+        return currentWave != null && currentWave.waveIndex == TotalWaveCount;
+    }
     public void StartSpawn()
     {
         if (spawnRoutine == null)
