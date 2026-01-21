@@ -40,4 +40,14 @@ public class BGMController : MonoBehaviour
     {
         bgmAudioSource.mute = mute;
     }
+
+    public void SetVolume(float volume)
+    {
+        bgmAudioSource.volume = Mathf.Clamp01(volume);
+    }
+
+    public float GetVolume()
+    {
+        return bgmAudioSource.volume;
+    }
 }

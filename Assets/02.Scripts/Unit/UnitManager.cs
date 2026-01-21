@@ -96,26 +96,20 @@ public class UnitManager : MonoBehaviour
     {
         if (unitData == null || unitData.unitPrefab == null)
         {
-            Debug.LogError("UnitData 또는 프리팹이 비어있음");
             return;
         }
 
         GameObject unitObj = poolManager.SpawnPool(unitData.unitPrefab, pos, Quaternion.identity);
         if (unitObj == null)
         {
-            Debug.LogError("SpawnPool 오브젝트 없음: " + unitData.unitPrefab.name);
             return;
         }
         UnitBase unitBase = unitObj.GetComponent<UnitBase>();
         if (unitBase == null)
         {
-            Debug.LogError("UnitBase 없음: " + unitObj.name);
         }
         unitBase.Init(unitData, poolManager, monsterManager);
-        if (unitBase.UnitData == null)
-        {
-            Debug.LogError($"{unitObj.name}의 UnitData Init null");
-        }
+
         AddUnit(unitBase);
 
         UnitSpawned?.Invoke(unitData, result);

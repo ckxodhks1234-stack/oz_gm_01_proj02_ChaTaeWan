@@ -40,7 +40,6 @@ public class UnitBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         if (agent == null)
         {
-            Debug.LogError($"{gameObject.name} 에 NavMeshAgent 없음");
             return;
         }
         agent.enabled = true;
@@ -73,7 +72,6 @@ public class UnitBase : MonoBehaviour
 
     void Update()
     {
-        Debug.Log($"{gameObject.name} 현재 상태: {currentState}");
         if (attackTimer > 0)
         {
             attackTimer -= Time.deltaTime;
@@ -124,14 +122,12 @@ public class UnitBase : MonoBehaviour
             {
                 currentState = UnitState.Attack;
                 attackBeforeTimer = attackBeforeDelay;
-                Debug.Log("사거리 안에 들어옴, 공격 모드로 전환");
             }
         }
     }
 
     private void UpdateAttack()
     {
-        Debug.Log("공격중");
         if (target == null || !target.gameObject.activeSelf)
         {
             currentState = UnitState.Move;

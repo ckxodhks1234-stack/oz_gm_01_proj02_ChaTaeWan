@@ -25,7 +25,6 @@ public class UnitSelectPanel : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("UnitSelectPanel Refresh 호출됨");
         //모든 슬롯 비우기
         foreach (var slot in slots) slot.Clear();
 
@@ -36,7 +35,6 @@ public class UnitSelectPanel : MonoBehaviour
         {
             if (unit == null || unit.UnitData == null)
             {
-                Debug.Log("UnitData가 없음");
                 continue;
             }
             //최고등급은 안나오게

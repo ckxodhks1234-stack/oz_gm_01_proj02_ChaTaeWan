@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UnitController : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class UnitController : MonoBehaviour
 
     void Update()
     {
+        //UI 위에서 마우스 조작 중이면 유닛 컨트롤 무시
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
         //좌클릭 시작
         if (Input.GetMouseButtonDown(0))
         {

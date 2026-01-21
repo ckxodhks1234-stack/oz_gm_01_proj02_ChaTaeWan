@@ -109,7 +109,12 @@ public class GameTimer : MonoBehaviour
 
     private void GameClear()
     {
+        if (isGameOver) return;
 
+        isGameOver = true;
+        Time.timeScale = 0f;
+
+        gameClearPanel.SetActive(true);
     }
 
     private void GameOver()

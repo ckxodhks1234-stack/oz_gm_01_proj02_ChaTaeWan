@@ -24,7 +24,6 @@ public class UnitSelectSlot : MonoBehaviour
         frameImage.color = data.frameColor;
         frameImage.enabled = true;
 
-        if (countText.text == null) Debug.Log("카운트 텍스트 없음");
         countText.gameObject.SetActive(true);
         countText.text = count.ToString();
 
@@ -56,11 +55,8 @@ public class UnitSelectSlot : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("슬롯 클릭됨");
-
         if (unitData != null)
         {
-            Debug.Log($"선택된 유닛: {unitData.name}");
             synthesisController.AddUnit(unitData);
         }
     }
