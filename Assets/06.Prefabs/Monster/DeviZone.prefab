@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9063636465205023062}
   - component: {fileID: 3923841153748012228}
   - component: {fileID: 8515229107258934097}
+  - component: {fileID: 4284490305449267140}
   m_Layer: 0
   m_Name: NurbsPath.007
   m_TagString: Untagged
@@ -83,6 +84,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4284490305449267140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835290566475372030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b04886b5199bd44ea6bb3b8907c6659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackDistance: 0.12
+  shakePower: 0.08
+  duration: 0.12
 --- !u!1 &5156340256886292644
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +110,7 @@ GameObject:
   - component: {fileID: 6273160361179957739}
   - component: {fileID: 6346603769588409292}
   - component: {fileID: 5376700899169753169}
+  - component: {fileID: 262199780878190149}
   m_Layer: 0
   m_Name: Cube.008
   m_TagString: Untagged
@@ -166,6 +183,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &262199780878190149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156340256886292644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b04886b5199bd44ea6bb3b8907c6659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackDistance: 0.2
+  shakePower: 0.08
+  duration: 0.2
 --- !u!1 &5235210055129807138
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +244,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac560c12500de040aca441d7ea7e5bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path: []
-  targetIndex: 0
   arriveRange: 0.1
   rotateSpeed: 10

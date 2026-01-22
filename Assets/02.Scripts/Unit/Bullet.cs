@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
         //총알이 몬스터에 도달했는지 확인
         if (Vector3.Distance(transform.position, targetMonster.transform.position) < 0.1f)
         {
-            targetMonster.TakeDamage(bulletDamage);
+            targetMonster.TakeDamage(bulletDamage, transform.position);
             Return();
         }
     }

@@ -15,6 +15,9 @@ public class MonsterBase : MonoBehaviour
     private MonsterManager monsterManager;
     private MonsterData monsterData;
 
+    private HitAnim hitAnim;
+    private bool isDead;
+
     //몬스터 정보들 초기화
     public void Initiallize(MonsterData data, Transform[] pathPoints,
         MonsterManager manager, PoolManager pool)
@@ -27,6 +30,9 @@ public class MonsterBase : MonoBehaviour
         moveSpeed = data.monsterMoveSpeed;
         path = pathPoints;
         targetIndex = 0;
+
+        hitAnim = GetComponentInChildren<HitAnim>();
+        isDead = false;
     }
 
     void Update()
@@ -65,8 +71,16 @@ public class MonsterBase : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 attackPos)
     {
+        if (isDead) return;
+
+        if (hitAnim != null)
+        {
+            Vector3 hitDir = attackPos - transform.position;
+            hitAnim.PlayHit(hitDir);
+        }
+
         currentHp -= damage;
         if (currentHp <= 0)
         {
@@ -76,6 +90,10 @@ public class MonsterBase : MonoBehaviour
 
     private void Die()
     {
+        if (isDead) return;
+
+        isDead = true;
+
         //죽으면 풀 반환
         monsterManager.DieMonster(this);
         poolManager.ReturnPool(monsterData.monsterPrefab, gameObject);
