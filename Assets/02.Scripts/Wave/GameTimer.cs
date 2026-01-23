@@ -125,8 +125,6 @@ public class GameTimer : MonoBehaviour
         Time.timeScale = 0f;
         gameOverUI.Show(currentWaveIndex);
 
-        Debug.Log("게임 오버");
-
         monsterSpawner.StopSpawn();
     }
 

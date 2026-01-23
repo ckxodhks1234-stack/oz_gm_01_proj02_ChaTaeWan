@@ -46,7 +46,6 @@ public class MonsterSpawner : MonoBehaviour
         currentWave = waveDataList.Find(w => w.waveIndex == waveIndex);
 
         if (currentWave == null || monsterManager == null) return;
-        Debug.Log($"현재 웨이브 : {currentWave.waveIndex}");
     }
 
     public bool IsLastWave()
