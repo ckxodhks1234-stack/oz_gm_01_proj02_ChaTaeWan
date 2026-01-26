@@ -2432,6 +2432,7 @@ PrefabInstance:
     - {fileID: 8298039343546520775, guid: 368e1711fb103af4a8fe3a912d2cbe22, type: 3}
     - {fileID: 8289045086487913331, guid: 368e1711fb103af4a8fe3a912d2cbe22, type: 3}
     - {fileID: 1527745938262953541, guid: 368e1711fb103af4a8fe3a912d2cbe22, type: 3}
+    - {fileID: 7242392303547884539, guid: 368e1711fb103af4a8fe3a912d2cbe22, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 197278985684462240, guid: 368e1711fb103af4a8fe3a912d2cbe22, type: 3}
       insertIndex: -1
@@ -2443,17 +2444,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6630983699407644216, guid: 368e1711fb103af4a8fe3a912d2cbe22, type: 3}
   m_PrefabInstance: {fileID: 825565130}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &825565132 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6580550840249818275, guid: 368e1711fb103af4a8fe3a912d2cbe22, type: 3}
-  m_PrefabInstance: {fileID: 825565130}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9af15597cce19342869bcccf0079cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &838132942
 GameObject:
   m_ObjectHideFlags: 0
@@ -4489,7 +4479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitManager: {fileID: 54142271}
-  playerGold: {fileID: 825565132}
+  playerGold: {fileID: 544011262}
   synthesisUI: {fileID: 3060462791842414875}
   unitResultUI: {fileID: 829230138808160794, guid: fe36f36c43d3c3a4093c3c931738d4c2, type: 3}
   unitResultPanel: {fileID: 2115310919}
